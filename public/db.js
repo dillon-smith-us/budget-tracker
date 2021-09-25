@@ -27,7 +27,7 @@ function saveRecord(record) {
 };
 
 function checkDatabase() {
-    const transaction = db.transaction('pending', 'readwrite');
+    const transaction = db.transaction(['pending'], 'readwrite');
     const store = transaction.objectStore('pending');
     const getAll = store.getAll;
 
@@ -44,7 +44,7 @@ function checkDatabase() {
             .then(response => response.json())
               .then(() => {
                   // if succesful, delete records
-                  const transaction = db.transaction('pending', 'readwrite');
+                  const transaction = db.transaction(['pending'], 'readwrite');
                   const store = transaction.objectStore('pending');
                   store.clear();
               });
