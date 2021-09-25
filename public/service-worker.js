@@ -7,8 +7,6 @@ const FILES_TO_CACHE = [
     'icons/icon-192x192.png',
     'icons/icon-512x512.png',
     'manifest.webmanifest',
-    'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-    'https://cdn.jsdelivr.net/npm/chart.js@2.8.0'
 ];
 
 const CACHE_NAME = 'static-cache-v2';
@@ -21,8 +19,8 @@ self.addEventListener('install', event => {
             console.log('offline info precached, yay!')
             return cache.addAll(FILES_TO_CACHE);
         })
-    );
-    self.skipWaiting();
+    )
+    .then(() => self.skipWaiting()) 
 });
 
 // ACTIVATE
@@ -40,7 +38,7 @@ self.addEventListener('activate', event => {
             )
         })
     )
-    .then((self.clients.claim()));
+    .then(()=>self.clients.claim());
 });
 
 self.addEventListener('fetch', event => {
@@ -58,8 +56,10 @@ self.addEventListener('fetch', event => {
                         }
                         return response;
                     })
-                    .catch((error) => {
+                    .catch((err) => {
+                        console.log(err);
                         return cache.match(event.request);
+                        
                     });
                 })
                 .catch(err => console.log(err))
