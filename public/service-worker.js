@@ -7,16 +7,19 @@ const FILES_TO_CACHE = [
     'icons/icon-192x192.png',
     'icons/icon-512x512.png',
     'manifest.webmanifest',
+    'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+    "https://cdn.jsdelivr.net/npm/chart.js@2.8.0",
+
 ];
 
-const CACHE_NAME = 'static-cache-v2';
-const DATA_CACHE_NAME = 'data-cache-v1';
+const CACHE_NAME = 'static-cache-v13';
+const DATA_CACHE_NAME = 'data-cache-v8';
 
 // INSTALL
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache=> {
-            console.log('offline info precached, yay!')
+            console.log('offline info precached succesfull, yay!')
             return cache.addAll(FILES_TO_CACHE);
         })
     )
@@ -45,8 +48,7 @@ self.addEventListener('fetch', event => {
     // cache succesful GET request to the API
     if (event.request.url.includes('/api/')) {
         event.respondWith(
-            caches
-                .open(DATA_CACHE_NAME)
+            caches.open(DATA_CACHE_NAME)
                 .then(cache => {
                     return fetch(event.request)
                     .then(response => {
@@ -57,7 +59,6 @@ self.addEventListener('fetch', event => {
                         return response;
                     })
                     .catch((err) => {
-                        console.log(err);
                         return cache.match(event.request);
                         
                     });
