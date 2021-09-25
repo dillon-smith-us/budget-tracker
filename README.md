@@ -8,3 +8,10 @@
 * [Deployment](#Deployment)
 
 ## Overview 
+  In this repository, I have built a budget tracker app utilizing IndexedDb. The main focus of this unit was PWA's: Progressive Web Applications. This application allows for offline rendering, and data entry. The data will be abke to add expenses and deposits to a budget offline or online. The total should be populated once brought back online if data was entered offline.
+
+## Tools
+  Node, Express, Mongodb.
+
+## Deployment 
+  Application is live here -----> https://murmuring-lake-45821.herokuapp.com/
