@@ -2,7 +2,7 @@
 let db;
 const request = indexedDB.open('budget', 1);
 
-request.onupgradeneeded = (e) => {
+request.onupgradeneeded = function(e) {
     db = e.target.result;
     db.createObjectStore('pending', {autoIncrement: true})
 };
@@ -11,7 +11,7 @@ request.onerror =(err) => {
     console.log(err.message)
 };
 
-request.onsuccess = (e) => {
+request.onsuccess = function(e) {
     db = e.target.result;
 
      //is app online?
