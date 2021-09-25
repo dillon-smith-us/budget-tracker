@@ -16,7 +16,7 @@ const CACHE_NAME = 'static-cache-v13';
 const DATA_CACHE_NAME = 'data-cache-v8';
 
 // INSTALL
-self.addEventListener('install', event => {
+self.addEventListener('install',  function(event) {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache=> {
             console.log('offline info precached succesfull, yay!')
@@ -27,7 +27,7 @@ self.addEventListener('install', event => {
 });
 
 // ACTIVATE
-self.addEventListener('activate', event => {
+self.addEventListener('activate', function(event) {
     //remove old caches
     event.waitUntil(
         caches.keys().then(keyList => {
@@ -44,7 +44,7 @@ self.addEventListener('activate', event => {
     .then(()=>self.clients.claim());
 });
 
-self.addEventListener('fetch',  function(event) {
+self.addEventListener('fetch', event=> {
     // cache succesful GET request to the API
     if (event.request.url.includes('/api/')) {
         event.respondWith(
