@@ -16,7 +16,7 @@ const CACHE_NAME = 'static-cache-v13';
 const DATA_CACHE_NAME = 'data-cache-v8';
 
 // INSTALL
-self.addEventListener('install',  function(event) {
+self.addEventListener('install',  event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache=> {
             console.log('offline info precached succesfull, yay!')
