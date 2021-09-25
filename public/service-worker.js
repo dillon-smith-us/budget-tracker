@@ -1,12 +1,11 @@
 const FILES_TO_CACHE = [
     '/',
-    'index.html',
-    'index.html',
-    'db.js',
-    'styles.css',
+    '/index.html',
+    '/db.js',
+    '/styles.css',
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png',
-    'manifest.webmanifest',
+    '/manifest.webmanifest',
     'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
     'https://cdn.jsdelivr.net/npm/chart.js@2.8.0'
 ];
@@ -17,7 +16,7 @@ const DATA_CACHE_NAME = 'data-cache-v8';
 // INSTALL
 self.addEventListener('install', (e) => {
     e.waitUntil(
-        caches.open(CAHCE_NAME).then((cache)=> {
+        caches.open(CACHE_NAME).then((cache)=> {
             return cache.addAll(FILES_TO_CACHE);
         })
     );
