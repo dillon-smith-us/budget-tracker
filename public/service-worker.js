@@ -15,9 +15,10 @@ const CACHE_NAME = 'static-cache-v2';
 const DATA_CACHE_NAME = 'data-cache-v1';
 
 // INSTALL
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache=> {
+            console.log('offline info precached, yay!')
             return cache.addAll(FILES_TO_CACHE);
         })
     );
@@ -30,7 +31,7 @@ self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(keyList => {
             return Promise.all(
-                keyList.map((key) => {
+                keyList.map(key => {
                     if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
                         console.log('deleting previous cache', key)
                         return caches.delete(key);
@@ -42,7 +43,7 @@ self.addEventListener('activate', event => {
     .then((self.clients.claim()));
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
     // cache succesful GET request to the API
     if (event.request.url.includes('/api/')) {
         event.respondWith(
