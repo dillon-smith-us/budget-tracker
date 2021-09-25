@@ -44,7 +44,7 @@ self.addEventListener('activate', event => {
     .then(()=>self.clients.claim());
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch',  function(event) {
     // cache succesful GET request to the API
     if (event.request.url.includes('/api/')) {
         event.respondWith(
